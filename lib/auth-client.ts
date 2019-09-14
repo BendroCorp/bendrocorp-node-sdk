@@ -57,18 +57,24 @@ export class AuthClient {
     }
   }
 
-  getAuthHeader() {
-    let header = {};
-    header['Authorization'] = `Bearer ${this.access_token}`
-    return header;
+  async getAuthHeader(): Promise<string> {
+    await this.refreshCredential();
+    return `Bearer ${this.access_token}`
   }
 
-  accessIsExpired(): boolean {
+  private accessIsExpired(): boolean {
     if (this.access_token) {
       const jwtHelper = new JwtHelperService();
       const decodedToken = jwtHelper.decodeToken(this.access_token);
       return moment().isAfter(moment.unix(decodedToken.exp));
     }
+  }
+
+  /**
+   * Retrieve the credential set
+   */
+  getCredentials(): { access_token?: string, refresh_token?: string, id_token?: string} {
+    return { access_token: this.access_token, refresh_token: this.refresh_token, id_token: this.id_token }
   }
 
   setCredentials(params: { access_token?: string, refresh_token?: string, id_token?: string}) {

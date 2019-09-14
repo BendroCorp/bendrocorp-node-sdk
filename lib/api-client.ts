@@ -22,6 +22,13 @@ export class ApiClient {
           })
         }
 
+        if (this.params.auth) {
+          const authHeader = await this.params.auth.getAuthHeader()
+          if (authHeader) {
+            reqHeaders['Authorization'] = authHeader;
+          }
+        }
+
         const results = await axios.get(this.params.config.serviceUri + uri, { headers: reqHeaders });
         const data = results.data as T;
         return data;
@@ -57,7 +64,14 @@ export class ApiClient {
         })
       }
 
-      const results = await axios.get(this.params.config.serviceUri + uri, { headers: reqHeaders });
+      if (this.params.auth) {
+        const authHeader = await this.params.auth.getAuthHeader()
+        if (authHeader) {
+          reqHeaders['Authorization'] = authHeader;
+        }
+      }
+
+      const results = await axios.post(this.params.config.serviceUri + uri, { headers: reqHeaders });
       const resultData = results.data as T;
       return resultData;
     } catch (error) {
@@ -91,7 +105,14 @@ export class ApiClient {
         })
       }
 
-      const results = await axios.get(this.params.config.serviceUri + uri, { headers: reqHeaders });
+      if (this.params.auth) {
+        const authHeader = await this.params.auth.getAuthHeader()
+        if (authHeader) {
+          reqHeaders['Authorization'] = authHeader;
+        }
+      }
+
+      const results = await axios.put(this.params.config.serviceUri + uri, { headers: reqHeaders });
       const resultData = results.data as T;
       return resultData;
     } catch (error) {
@@ -124,7 +145,14 @@ export class ApiClient {
         })
       }
 
-      const results = await axios.get(this.params.config.serviceUri + uri, { headers: reqHeaders });
+      if (this.params.auth) {
+        const authHeader = await this.params.auth.getAuthHeader()
+        if (authHeader) {
+          reqHeaders['Authorization'] = authHeader;
+        }
+      }
+
+      const results = await axios.delete(this.params.config.serviceUri + uri, { headers: reqHeaders });
       const data = results.data as T;
       return data;
     } catch (error) {

@@ -17,18 +17,18 @@ export class offender extends BaseResource {
   } 
 
   async list_types(params: { kind: 'ratings'|'infractions'|'force_level' }) {
-
+    return null;
   }
 
   async create(params: { report: OffenderReport }) {
-    
+    return null;
   }
 
   async update(params: { report: OffenderReport }) {
-    
+    return null;
   }
 
   async submit_report(params: { report: OffenderReport }): Promise<OffenderReport> {
-
+    return null;
   }
 }

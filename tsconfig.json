@@ -9,5 +9,29 @@
        "outDir": "./dist",
        "lib": [ "dom", "es6", "es5" ]
     },
-    "files": ["./lib/ng-timespan.ts"]
+    "files": [
+      "./lib/bendrocorp-node-sdk.ts",
+      "./lib/api-client.ts",
+      "./lib/auth-client.ts",
+      "./lib/base.resource.ts",
+      "./lib/configuration.ts",
+      "./lib/offender.resource.ts",
+      "./lib/report.resource.ts",
+      "./lib/models/approval.model.ts",
+      "./lib/models/event.model.ts",
+      "./lib/models/http-model.ts",
+      "./lib/models/law.model.ts",
+      "./lib/models/misc.model.ts",
+      "./lib/models/offender.model.ts",
+      "./lib/models/request.model.ts",
+      "./lib/models/system-map.model.ts",
+      "./lib/models/character.model.ts",
+      "./lib/models/flight-log.model.ts",
+      "./lib/models/job-board.model.ts",
+      "./lib/models/message.model.ts",
+      "./lib/models/news.model.ts",
+      "./lib/models/report.model.ts",
+      "./lib/models/ship.models.ts",
+      "./lib/models/user.model.ts"
+      ]
  }

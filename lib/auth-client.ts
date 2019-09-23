@@ -2,7 +2,7 @@ import { ApiClient } from "./api-client";
 import { BendroConfiguration } from "./configuration";
 import { IdTokenResponse } from "./models/user.model";
 import { HttpClientError } from "./models/http-model";
-import { JwtHelperService } from '@auth0/angular-jwt';
+import * as jwt from 'jsonwebtoken'
 import * as moment from 'moment';
 
 export class AuthClient {
@@ -64,9 +64,10 @@ export class AuthClient {
 
   private accessIsExpired(): boolean {
     if (this.access_token) {
-      const jwtHelper = new JwtHelperService();
-      const decodedToken = jwtHelper.decodeToken(this.access_token);
-      return moment().isAfter(moment.unix(decodedToken.exp));
+      // const jwtHelper = new JwtHelperService();      
+      const decodedToken = jwt.decode(this.access_token);
+      const payloadExp = decodedToken['payload'].exp;
+      return moment().isAfter(moment.unix(payloadExp));
     }
   }
 

@@ -5,14 +5,17 @@ import { BendroConfiguration } from "./configuration";
 import { Report, ReportTemplate, ReportField, ReportFieldValue } from "./models/report.model";
 import { StatusMessage } from "./models/misc.model";
 
-export class report extends BaseResource {
+export class reportResource extends BaseResource {
   reportConfig: any;
 
   constructor(public params: { auth?: AuthClient }) {
     super(params);
     this.reportConfig = new BendroConfiguration({ service: 'reports' })
   }
-
+  /**
+   * List a collection of resources
+   * @param params { type: 'reports'|'templates' }
+   */
   async list(params: { type: 'reports'|'templates' }): Promise<Report|ReportTemplate>
   {
     let apiClient = new ApiClient({ config: this.reportConfig })
@@ -27,10 +30,13 @@ export class report extends BaseResource {
     }
   }
 
+  /**
+   * Create a resource
+   */
   async create(params: { 
     type:'report'|'template'|'field',
     report?: { 
-      template_id: number 
+      template_id: string 
     },
     template?: { 
       name: string
@@ -76,11 +82,15 @@ export class report extends BaseResource {
     }
   }
 
+  /**
+   * Update a resource
+   */
   async update(params: { 
     type:'report'|'template'|'field'|'value',
     report?: { 
       id: number,
-      report_for_id: number
+      report_for_id: number,
+      draft?: boolean
     },
     template?: { 
       id: string,
@@ -138,6 +148,9 @@ export class report extends BaseResource {
     }
   }
 
+  /**
+   * Archive a resource
+   */
   async archive(params: { type:'report'|'template'|'field',
   report?: { 
     id: number

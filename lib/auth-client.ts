@@ -9,6 +9,7 @@ export class AuthClient {
   private access_token: string;
   private id_token: string;
   private refresh_token: string;
+  private credentialsSet: boolean = false;
   private doAutoRefresh: boolean = true;
 
   constructor(params?: { auto_refresh?: boolean }) {
@@ -17,7 +18,7 @@ export class AuthClient {
     }
   }
 
-  async auth(params: { email: string, password: string, code?: number, device: string, offline_access?: boolean} ): Promise<IdTokenResponse|HttpClientError> {
+  async auth(params: { email: string, password: string, code?: number, device: string, offline_access?: boolean} ): Promise<any> {
     const apiClient = new ApiClient({ config: new BendroConfiguration({service: 'main'}) })
     let result = await apiClient.post<IdTokenResponse>('/auth', 
     { 
@@ -33,9 +34,8 @@ export class AuthClient {
 
     if (!(result instanceof HttpClientError) && result instanceof IdTokenResponse) {
       this.setCredentials({ access_token: result.access_token, refresh_token: result.refresh_token, id_token: result.id_token })
+      this.credentialsSet = true;
     }
-
-    return result;
   }
 
   async refreshCredential() {
@@ -53,7 +53,7 @@ export class AuthClient {
         this.setCredentials({ access_token: result.access_token, refresh_token: result.refresh_token, id_token: result.id_token })
       }
     } else {
-      console.warn('Could not auto refresh. Refresh token not present!')
+      console.warn('Could not auto refresh.')
     }
   }
 
@@ -74,11 +74,11 @@ export class AuthClient {
   /**
    * Retrieve the credential set
    */
-  getCredentials(): { access_token?: string, refresh_token?: string, id_token?: string} {
+  getCredentials(): { access_token?: string, refresh_token?: string, id_token?: string } {
     return { access_token: this.access_token, refresh_token: this.refresh_token, id_token: this.id_token }
   }
 
-  setCredentials(params: { access_token?: string, refresh_token?: string, id_token?: string}) {
+  setCredentials(params: { access_token?: string, refresh_token?: string, id_token?: string }) {
     this.access_token = params.access_token;
     this.refresh_token = params.refresh_token;
     this.id_token = params.id_token;

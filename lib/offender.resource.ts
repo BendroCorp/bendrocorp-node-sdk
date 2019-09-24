@@ -4,7 +4,7 @@ import { ApiClient } from "./api-client";
 import { BendroConfiguration } from "./configuration";
 import { Offender, OffenderReport } from "./models/offender.model";
 
-export class offender extends BaseResource {
+export class offenderResource extends BaseResource {
   offenderConfig = new BendroConfiguration({ service: 'main' })
 
   constructor(public params: { auth?: AuthClient }) {

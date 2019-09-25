@@ -15,7 +15,7 @@ deploy:
     secure: R1nx2RWAmtitsOGoNRT+G9cNW+w/s1Q5mPovYvcyv14XKv8XnqAif0bJ8RmWYEPAFKo5kfxbjX7NgPeDeRx+ETyIGErRkbVM7jTU0qVDcYGrETR1uC3wA0tH0OOxOh2TZedFmQLMbpsfqkG4dDT8GqaVbij8RPmaGaotFdld84r9A3JvKNyCsY+ulP2KlUmw9Lm54CqjrzFDJHkruYgZ3iaQtQHByOCJS9E1js1guxudUTRL4IwMwvwVlQaIk7J27Ue0AR/ubTrX3b7iCPlrL7XD9gA6xS0aYwJEBwweys3byPOC4rvc6KY7YiNFzUiL4wECgcYYogq9oEU2FEuimGtuXguIKQINx9Nd65zGyrLBbPxP7RSKDbceb/aiDgHe0mDlVNHUruqE1hVMR0hIHJVWbqFm1PUTcZyNqo6YA6+Oa8i2UL6YqdUihrASOJnwZArCcmDjGswPonMa8axCKIOfrX3x/CGS3CwtPVVsKmcwKPEAoYtwNzbjlEvpPhy2O+NGpu7AqcwZCIR/u5EdIQfMzhUN3zRhOklXaIThFXCX6uPakU+hGPxz3UQ2x+CEjwb/XuAnukVlUCtVQzcZ+VwE4BEFzKvkYv5QWoj3f7PCjpX66f6QlqEfyhgZz1gzGuFLecaAFSKMElrqPkt35UdffcC6Zbl3o1VmXA1aoYw=
   on:
     tags: true
-    repo: BendroCorp/bendrocorp-node-sdk
+    repo: bendrocorp/bendrocorp-node-sdk
 notifications:
   slack:
     rooms:

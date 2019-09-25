@@ -6,7 +6,7 @@ describe('Placeholder test', () => {
   const three = 1 + 2;
   
   it('should return a result', () => {
-    expect(three).to.not.be.equal(3);
+    expect(three).to.be.equal(3);
   });
 
 });

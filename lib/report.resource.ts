@@ -4,6 +4,8 @@ import { ApiClient } from "./api-client";
 import { BendroConfiguration } from "./configuration";
 import { Report, ReportTemplate, ReportField, ReportFieldValue } from "./models/report.model";
 import { StatusMessage } from "./models/misc.model";
+import { Observable, observable } from 'rxjs';
+import { HttpClientError } from "./models/http-model";
 
 export class reportResource extends BaseResource {
   reportConfig: any;
@@ -16,24 +18,35 @@ export class reportResource extends BaseResource {
    * List a collection of resources
    * @param params { type: 'reports'|'templates' }
    */
-  async list(params: { type: 'reports'|'templates' }): Promise<Report|ReportTemplate>
+  list(params: { type: 'reports'|'templates' }): Observable<Report|ReportTemplate>
   {
     let apiClient = new ApiClient({ config: this.reportConfig })
-    if (params.type === 'reports') {
-      const results = await apiClient.get<Report[]>(`/reports`);
-      return results;
-    } else if (params.type === 'templates') {
-      const results = await apiClient.get<Report[]>(`/reports`);
-      return results;
-    } else {
-      throw 'Not a valid list type!';
-    }
+    return Observable.create(observer => {
+      if (params.type === 'reports') {
+        apiClient.get<Report[]>(`/reports`).then((results) => {
+          observer.next(results);
+          observer.complete();
+        }).catch((error) => {
+          observer.error(error);
+        });
+      } else if (params.type === 'templates') {
+        apiClient.get<ReportTemplate[]>(`/templates`).then((results) => {
+          observer.next(results);
+          observer.complete();
+        }).catch((error) => {
+          observer.error(error);
+        });
+      } else {
+        observer.error('Not a valid list type!');
+        observer.complete();
+      }
+    });
   }
 
   /**
    * Create a resource
    */
-  async create(params: { 
+  create(params: { 
     type:'report'|'template'|'field',
     report?: { 
       template_id: string 
@@ -49,43 +62,59 @@ export class reportResource extends BaseResource {
       required: boolean,
       ordinal: number
     } 
-  }): Promise<Report|ReportField|ReportTemplate>
+  }): Observable<Report|ReportField|ReportTemplate>
   {
     const apiClient = new ApiClient({ config: this.reportConfig })
-
-    if (params.type === 'field') {
-      if (params.field) {
-        const report = params.field;
-        const results = await apiClient.post<ReportField>(`/fields`, { report });
-        return results;
+    return Observable.create(async observer => {
+      if (params.type === 'field') {
+        if (params.field) {
+          try {
+            const report = params.field;
+            const results = await apiClient.post<ReportField>(`/fields`, { report }) as ReportField;
+            observer.next(results);
+            observer.complete();
+          } catch (error) {
+            observer.error(error as HttpClientError);
+          }
+        } else {
+          observer.error({ status: 500, message: 'To create a template you must include the \'field\' object!' } as HttpClientError);
+        }
+      } else if (params.type === 'report') {
+        if (params.report) {
+          try {
+            const report_field = params.report;
+            const results = await apiClient.post<Report>(`/reports`, { report_field });
+            observer.next(results);
+            observer.complete();
+          } catch (error) {
+            observer.error(error as HttpClientError);
+          }
+        } else {
+          observer.error({ status: 500, message: 'To create a template you must include the \'report\' object!' } as HttpClientError);
+        }
+      } else if (params.type === 'template') {
+        if (params.template) {
+          try {
+            const report_template = params.template;
+            const results = await apiClient.post<ReportTemplate>(`/templates`, { report_template });
+            observer.next(results);
+            observer.complete();
+          } catch (error) {
+            observer.error(error as HttpClientError);
+          }
+        } else {
+          observer.error({ status: 500, message: 'To create a template you must include the \'template\' object!' } as HttpClientError);
+        }
       } else {
-        throw 'To create a template you must include the \'field\' object!'
+        observer.error({ status: 500, message: 'Not a valid create type!' } as HttpClientError);
       }
-    } else if (params.type === 'report') {
-      if (params.report) {
-        const report_field = params.report;
-        const results = await apiClient.post<Report>(`/reports`, { report_field });
-        return results;
-      } else {
-        throw 'To create a template you must include the \'report\' object!'
-      }
-    } else if (params.type === 'template') {
-      if (params.template) {
-        const report_template = params.template;
-        const results = await apiClient.post<ReportTemplate>(`/templates`, { report_template });
-        return results;
-      } else {
-        throw 'To create a template you must include the \'template\' object!'
-      }
-    } else {
-      throw 'Not a valid create type!'; 
-    }
+    });
   }
 
   /**
    * Update a resource
    */
-  async update(params: { 
+  update(params: { 
     type:'report'|'template'|'field'|'value',
     report?: { 
       id: number,
@@ -108,50 +137,71 @@ export class reportResource extends BaseResource {
       id: string,
       value: string
     }
-  }): Promise<Report|ReportField|ReportTemplate|ReportFieldValue> {
+  }): Observable<Report|ReportField|ReportTemplate|ReportFieldValue> {
     const apiClient = new ApiClient({ config: this.reportConfig })
-
-    if (params.type === 'field') {
-      if (params.field) {
-        const report = params.field;
-        const results = await apiClient.put<ReportField>(`/fields`, { report });
-        return results;
+    return Observable.create(async observer => {
+      if (params.type === 'field') {
+        if (params.field) {
+          try {
+            const report = params.field;
+            const results = await apiClient.put<ReportField>(`/fields`, { report });
+            observer.next(results);
+            observer.complete();
+          } catch (error) {
+            observer.error(error as HttpClientError);
+          }
+        } else {
+          observer.error({ status: 500, message: 'To create a template you must include the \'field\' object!' } as HttpClientError);
+        }
+      } else if (params.type === 'report') {
+        if (params.report) {
+          try {
+            const report_field = params.report;
+            const results = await apiClient.put<Report>(`/reports`, { report_field });
+            observer.next(results);
+            observer.complete();
+          } catch (error) {
+            observer.error(error as HttpClientError);
+          }
+        } else {
+          observer.error({ status: 500, message: 'To create a template you must include the \'report\' object!' } as HttpClientError);
+        }
+      } else if (params.type === 'template') {
+        if (params.template) {
+          try {
+            const report_template = params.template;
+            const results = await apiClient.put<ReportTemplate>(`/templates`, { report_template });
+            observer.next(results);
+            observer.complete();
+          } catch (error) {
+            observer.error(error as HttpClientError);
+          }
+        } else {
+          observer.error({ status: 500, message: 'To create a template you must include the \'template\' object!' } as HttpClientError);
+        }
+      } else if (params.type === 'value') {
+        if (params.value) {
+          try {
+            const field_value = params.template;
+            const results = await apiClient.put<ReportFieldValue>(`/values`, { field_value });
+            observer.next(results);
+            observer.complete();
+          } catch (error) {
+            observer.error(error as HttpClientError);
+          }
+        } else {
+          observer.error({ status: 500, message: 'To create a template you must include the \'template\' object!' } as HttpClientError);
+        }
       } else {
-        throw 'To create a template you must include the \'field\' object!'
+        observer.error({ status: 500, message: 'Not a valid create type!' } as HttpClientError);
       }
-    } else if (params.type === 'report') {
-      if (params.report) {
-        const report_field = params.report;
-        const results = await apiClient.put<Report>(`/reports`, { report_field });
-        return results;
-      } else {
-        throw 'To create a template you must include the \'report\' object!'
-      }
-    } else if (params.type === 'template') {
-      if (params.template) {
-        const report_template = params.template;
-        const results = await apiClient.put<ReportTemplate>(`/templates`, { report_template });
-        return results;
-      } else {
-        throw 'To create a template you must include the \'template\' object!'
-      }
-    } else if (params.type === 'value') {
-      if (params.value) {
-        const field_value = params.template;
-        const results = await apiClient.put<ReportTemplate>(`/templates`, { field_value });
-        return results;
-      } else {
-        throw 'To create a template you must include the \'template\' object!'
-      }
-    } else {
-      throw 'Not a valid create type!'; 
-    }
+    });
   }
 
   /**
    * Archive a resource
    */
-  async archive(params: { type:'report'|'template'|'field',
+  archive(params: { type:'report'|'template'|'field',
   report?: { 
     id: number
   },
@@ -161,35 +211,51 @@ export class reportResource extends BaseResource {
   field?: {
     id: string
   } 
-  }): Promise<StatusMessage> {
+  }): Observable<StatusMessage> {
     const apiClient = new ApiClient({ config: this.reportConfig })
-
-    if (params.type === 'field') {
-      if (params.field) {
-        const object = params.field;
-        const results = await apiClient.delete<StatusMessage>(`/fields/${object.id}`);
-        return results;
+    return Observable.create(async observer => {
+      if (params.type === 'field') {
+        if (params.field) {
+          try {
+            const object = params.field;
+            const results = await apiClient.delete<StatusMessage>(`/fields/${object.id}`);
+            observer.next(results);
+            observer.complete();
+          } catch (error) {
+            observer.error(error as HttpClientError);
+          }
+        } else {
+          observer.error({ status: 500, message: 'To create a template you must include the \'field\' object!' } as HttpClientError);
+        }
+      } else if (params.type === 'report') {
+        if (params.report) {
+          try {
+            const object = params.report;
+            const results = await apiClient.delete<StatusMessage>(`/reports/${object.id}`);
+            observer.next(results);
+            observer.complete();
+          } catch (error) {
+            observer.error(error as HttpClientError);
+          }
+        } else {
+          observer.error({ status: 500, message: 'To create a template you must include the \'report\' object!' } as HttpClientError);
+        }
+      } else if (params.type === 'template') {
+        if (params.template) {
+          try {
+            const object = params.template;
+            const results = await apiClient.delete<StatusMessage>(`/templates/${object.id}`);
+            observer.next(results);
+            observer.complete();
+          } catch (error) {
+            observer.error(error as HttpClientError);
+          }
+        } else {
+          observer.error({ status: 500, message: 'To create a template you must include the \'template\' object!' } as HttpClientError);
+        }
       } else {
-        throw 'To create a template you must include the \'field\' object!'
+        observer.error({ status: 500, message: 'Not a valid create type!' } as HttpClientError);
       }
-    } else if (params.type === 'report') {
-      if (params.report) {
-        const object = params.report;
-        const results = await apiClient.delete<StatusMessage>(`/reports/${object.id}`);
-        return results;
-      } else {
-        throw 'To create a template you must include the \'report\' object!'
-      }
-    } else if (params.type === 'template') {
-      if (params.template) {
-        const object = params.template;
-        const results = await apiClient.delete<StatusMessage>(`/templates/${object.id}`);
-        return results;
-      } else {
-        throw 'To create a template you must include the \'template\' object!'
-      }
-    } else {
-      throw 'Not a valid create type!'; 
-    }
+    });
   }
 }

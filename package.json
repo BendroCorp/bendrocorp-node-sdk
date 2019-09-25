@@ -16,7 +16,7 @@
     "build": "rm -rf ./dist && npm run bundle && npm run copy && touch ./dist/.npmrc",
     "postpublish": "echo \"All done!\"; exit 0",
     "pretest": "tsc -p ./test",
-    "test": "nyc mocha -r ts-node/register/type-check 'test/**/*.spec.ts'",
+    "test": "nyc mocha -r ts-node/register 'test/**/*.spec.ts'",
     "posttest": "nyc report --reporter=json --all && rm -f ./lib/*.js && rm -f ./lib/*.js.map && rm -f ./test/*.js && rm -f ./test/*.js.map"
   },
   "repository": {
@@ -45,11 +45,12 @@
     "nyc": "^14.1.1",
     "rollup-plugin-angular": "^0.4.4",
     "rollup-plugin-commonjs": "^8.0.2",
+    "rollup-plugin-multi-entry": "^2.1.0",
     "rollup-plugin-node-resolve": "^3.0.0",
     "rollup-plugin-typescript": "^0.8.1",
     "ts-node": "^7.0.1",
     "tslib": "^1.9.3",
-    "typescript": "^2.9.0"
+    "typescript": "^2.9.2"
   },
   "dependencies": {
     "@types/jsonwebtoken": "^8.3.4",

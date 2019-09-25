@@ -16,7 +16,7 @@ export class ApiClient {
         value: string;
       }]
     ): Promise<T|HttpClientError> {
-      return new Promise(async (resolve, reject) => {
+      return new Promise<T|HttpClientError>(async (resolve, reject) => {
         try {
           let reqHeaders = {};
           if (headers) {
@@ -60,7 +60,7 @@ export class ApiClient {
         value: string;
       }]
   ): Promise<T|HttpClientError> {
-    return new Promise(async (resolve, reject) => {
+    return new Promise<T|HttpClientError>(async (resolve, reject) => {
       try {
         let reqHeaders = {};
         if (headers) {
@@ -103,7 +103,7 @@ export class ApiClient {
         value: string;
       }]
   ): Promise<T|HttpClientError> {
-    return new Promise(async (resolve, reject) => {
+    return new Promise<T|HttpClientError>(async (resolve, reject) => {
       try {
         let reqHeaders = {};
         if (headers) {
@@ -145,7 +145,7 @@ export class ApiClient {
         value: string;
       }]
   ): Promise<T|HttpClientError> {
-    return new Promise(async (resolve, reject) => {
+    return new Promise<T|HttpClientError>(async (resolve, reject) => {
       try {
         let reqHeaders = {};
         if (headers) {

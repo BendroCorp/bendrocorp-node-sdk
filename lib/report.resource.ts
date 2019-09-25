@@ -4,7 +4,7 @@ import { ApiClient } from "./api-client";
 import { BendroConfiguration } from "./configuration";
 import { Report, ReportTemplate, ReportField, ReportFieldValue } from "./models/report.model";
 import { StatusMessage } from "./models/misc.model";
-import { Observable, observable } from 'rxjs';
+import { Observable, observable, Observer } from 'rxjs';
 import { HttpClientError } from "./models/http-model";
 
 export class reportResource extends BaseResource {
@@ -21,7 +21,7 @@ export class reportResource extends BaseResource {
   list(params: { type: 'reports'|'templates' }): Observable<Report|ReportTemplate>
   {
     let apiClient = new ApiClient({ config: this.reportConfig })
-    return Observable.create(observer => {
+    return Observable.create((observer: Observer<any>) => {
       if (params.type === 'reports') {
         apiClient.get<Report[]>(`/reports`).then((results) => {
           observer.next(results);
@@ -65,7 +65,7 @@ export class reportResource extends BaseResource {
   }): Observable<Report|ReportField|ReportTemplate>
   {
     const apiClient = new ApiClient({ config: this.reportConfig })
-    return Observable.create(async observer => {
+    return Observable.create(async (observer: Observer<any>) => {
       if (params.type === 'field') {
         if (params.field) {
           try {
@@ -139,7 +139,7 @@ export class reportResource extends BaseResource {
     }
   }): Observable<Report|ReportField|ReportTemplate|ReportFieldValue> {
     const apiClient = new ApiClient({ config: this.reportConfig })
-    return Observable.create(async observer => {
+    return Observable.create(async (observer: Observer<any>) => {
       if (params.type === 'field') {
         if (params.field) {
           try {
@@ -213,7 +213,7 @@ export class reportResource extends BaseResource {
   } 
   }): Observable<StatusMessage> {
     const apiClient = new ApiClient({ config: this.reportConfig })
-    return Observable.create(async observer => {
+    return Observable.create(async (observer: Observer<any>) => {
       if (params.type === 'field') {
         if (params.field) {
           try {

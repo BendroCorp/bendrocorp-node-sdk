@@ -2,9 +2,12 @@ import resolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
 import typescript from 'rollup-plugin-typescript';
 import {nameLibrary,PATH_SRC,PATH_DIST} from './config-library.js';
+import multiEntry from 'rollup-plugin-multi-entry';
+
 export default {
-  input: PATH_SRC+nameLibrary+'.ts',
+  // input: PATH_SRC+nameLibrary+'.ts',
   output: {
+    input: 'lib/**/*.ts',
     name: nameLibrary,
     format: 'umd',
     file: PATH_DIST+nameLibrary+".umd.js",
@@ -12,6 +15,7 @@ export default {
   },
   external: [ ],
   plugins: [
+    multiEntry(),
     typescript({
       typescript:require('typescript')
     }),

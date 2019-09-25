@@ -1,5 +1,7 @@
 # bendrocorp-node-sdk
 
+[![Build Status](https://travis-ci.org/BendroCorp/bendrocorp-node-sdk.svg?branch=master)](https://travis-ci.org/BendroCorp/bendrocorp-node-sdk) 
+
 #### Pre-Release - should not be used for anything anyone actually cares about :smile:
 
 #### AuthClient

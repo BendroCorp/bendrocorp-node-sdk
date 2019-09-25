@@ -35,6 +35,8 @@
   },
   "homepage": "https://github.com/BendroCorp/bendrocorp-node-sdk#readme",
   "devDependencies": {
+    "@types/chai": "^4.2.3",
+    "@types/mocha": "^5.2.7",
     "chai": "^4.2.0",
     "codecov": "^3.6.1",
     "cross-env": "^5.2.0",

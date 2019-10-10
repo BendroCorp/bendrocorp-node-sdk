@@ -50,6 +50,7 @@ export class User {
     rsi_handle?: string;
     main_character?: Character;
     roles?: Role[];
+    discord_identity: DiscordIdentity;
 }
 
 // deprecated?
@@ -64,6 +65,14 @@ export class NestedRole {
     role_id?: number
     role_nested_id?: number
     role_nested?: Role
+}
+
+
+export class DiscordIdentity {
+    discord_username: string;
+    discord_id: string;
+    refresh_token: string;
+    joined: boolean;
 }
 
 export class SignUp {

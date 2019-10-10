@@ -11,15 +11,22 @@ export class AuthClient {
   private refresh_token: string;
   private credentialsSet: boolean = false;
   private doAutoRefresh: boolean = true;
+  private useProduction: boolean;
 
-  constructor(params?: { auto_refresh?: boolean }) {
+  constructor(params?: { auto_refresh?: boolean, useProduction?: boolean; }) {
     if (params && params.auto_refresh != null) {
       this.doAutoRefresh = params.auto_refresh;
+
+      if (params.useProduction == null || params.useProduction == true) {
+        this.useProduction = true;
+      } else {
+        this.useProduction = false;
+      }
     }
   }
 
   async auth(params: { email: string, password: string, code?: number, device: string, offline_access?: boolean} ): Promise<any> {
-    const apiClient = new ApiClient({ config: new BendroConfiguration({service: 'main'}) })
+    const apiClient = new ApiClient({ config: new BendroConfiguration({ service: 'main', skipAppendApi: true }) })
     let result = await apiClient.post<IdTokenResponse>('/auth', 
     { 
       session: {
@@ -67,7 +74,13 @@ export class AuthClient {
       // const jwtHelper = new JwtHelperService();      
       const decodedToken = jwt.decode(this.access_token);
       const payloadExp = decodedToken['payload'].exp;
-      return moment().isAfter(moment.unix(payloadExp));
+      if (payloadExp) {
+        return moment().isAfter(moment.unix(payloadExp));
+      } else {
+        return false; // if there is no exp then...there is no expiration 😀
+      }
+    } else {
+      return true; // no access token definitely means that we can't do anything...
     }
   }
 
@@ -79,8 +92,16 @@ export class AuthClient {
   }
 
   setCredentials(params: { access_token?: string, refresh_token?: string, id_token?: string }) {
-    this.access_token = params.access_token;
-    this.refresh_token = params.refresh_token;
-    this.id_token = params.id_token;
+    if (params.access_token) {
+      this.access_token = params.access_token;
+    }
+
+    if (params.refresh_token) {
+      this.refresh_token = params.refresh_token;
+    }    
+
+    if (params.id_token) {
+      this.id_token = params.id_token;
+    }    
   }
 }

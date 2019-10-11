@@ -1,5 +1,7 @@
+export { BaseResource } from './base.resource'
+export { BendroConfiguration } from './configuration'
 export { AuthClient } from './auth-client';
-export { userResource } from './user.resource';
-export { streamResource } from './event-stream.resource';
-export { eventResource } from './event.resource';
-export { reportResource } from './report.resource'
+export { UserResource } from './user.resource';
+export { StreamResource } from './event-stream.resource';
+export { EventResource } from './event.resource';
+export { ReportResource } from './report.resource'

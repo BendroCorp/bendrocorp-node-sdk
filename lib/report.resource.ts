@@ -7,7 +7,7 @@ import { StatusMessage } from "./models/misc.model";
 import { Observable, observable, Observer } from 'rxjs';
 import { HttpClientError } from "./models/http-model";
 
-export class reportResource extends BaseResource {
+export class ReportResource extends BaseResource {
   reportConfig: any;
 
   constructor(public params: { auth?: AuthClient }) {

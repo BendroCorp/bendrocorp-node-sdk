@@ -7,7 +7,7 @@ import { Offender, OffenderReport } from "./models/offender.model";
 /**
  * This is not in a working state. DO NOT USE.
  */
-export class offenderResource extends BaseResource {
+export class OffenderResource extends BaseResource {
   offenderConfig = new BendroConfiguration({ service: 'main' })
 
   constructor(public params: { auth?: AuthClient }) {

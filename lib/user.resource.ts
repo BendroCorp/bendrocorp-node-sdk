@@ -7,7 +7,7 @@ import { ApiClient } from "./api-client";
 import { HttpClientError } from "./models/http-model";
 import { StatusMessage } from "./models/misc.model";
 
-export class userResource extends BaseResource
+export class UserResource extends BaseResource
 {
   userConfig: BendroConfiguration;
 

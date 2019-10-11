@@ -7,7 +7,7 @@ import { HttpClientError } from "./models/http-model";
 import { ApiClient } from "./api-client";
 import { StatusMessage } from "./models/misc.model";
 
-export class eventResource extends BaseResource {
+export class EventResource extends BaseResource {
   eventConfig: BendroConfiguration;
 
   constructor(public params: { auth: AuthClient, useProduction?: boolean })

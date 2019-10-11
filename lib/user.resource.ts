@@ -19,7 +19,7 @@ export class UserResource extends BaseResource
   }
 
   discord_identity(params: { code?: string, discord_identity_id?: string, type: 'join'|'complete' }): Observable<DiscordIdentity|StatusMessage> {
-    const apiClient = new ApiClient({ config: this.userConfig })
+    const apiClient = new ApiClient({ config: this.userConfig, auth: this.authClient })
     
     if (params.type === 'join') {
       if (params.code) {

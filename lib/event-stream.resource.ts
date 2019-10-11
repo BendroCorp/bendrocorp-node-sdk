@@ -5,6 +5,9 @@ import { BaseResource } from './base.resource';
 import { AuthClient } from './auth-client';
 import { BendroConfiguration } from './configuration';
 
+/**
+ * Gives you access to the BendroCorp event stream. Please note this is *not* intended to by users. It is intended to be consumed by client applications.
+ */
 export class StreamResource extends BaseResource {
   private streamConfig: BendroConfiguration;
   channel: Channel;

@@ -22,7 +22,7 @@ export class EventResource extends BaseResource {
    * @param params Parameter list.
    */
   list(params: { type: 'current'|'next'|'expired', expired_count?: number }): Observable<Event[]|Event> {
-    const apiClient = new ApiClient({ config: this.eventConfig })
+    const apiClient = new ApiClient({ config: this.eventConfig, auth: this.authClient })
 
     if (params.type === 'current') {
       return Observable.create(async (observer: Observer<any>) => {
@@ -62,7 +62,7 @@ export class EventResource extends BaseResource {
    * @param params { type: 'manual'|'auto', event_id: number }
    */
   attendance(params: { type: 'manual'|'auto', event_id: number, attendence_type_id?:1|2|3, discord_user_ids?: string[] }): Observable<EventAttendence|StatusMessage> {
-    const apiClient = new ApiClient({ config: this.eventConfig })
+    const apiClient = new ApiClient({ config: this.eventConfig, auth: this.authClient })
 
     if (params.type === 'manual') {
       if (params.attendence_type_id) {

@@ -10,7 +10,7 @@ import { HttpClientError } from "./models/http-model";
 export class ReportResource extends BaseResource {
   reportConfig: any;
 
-  constructor(public params: { auth?: AuthClient }) {
+  constructor(public params: { auth: AuthClient }) {
     super(params);
     this.reportConfig = new BendroConfiguration({ service: 'reports' })
   }
@@ -20,7 +20,7 @@ export class ReportResource extends BaseResource {
    */
   list(params: { type: 'reports'|'templates' }): Observable<Report|ReportTemplate>
   {
-    let apiClient = new ApiClient({ config: this.reportConfig })
+    let apiClient = new ApiClient({ config: this.reportConfig, auth: this.authClient })
     return Observable.create((observer: Observer<any>) => {
       if (params.type === 'reports') {
         apiClient.get<Report[]>(`/reports`).then((results) => {
@@ -64,7 +64,7 @@ export class ReportResource extends BaseResource {
     } 
   }): Observable<Report|ReportField|ReportTemplate>
   {
-    const apiClient = new ApiClient({ config: this.reportConfig })
+    const apiClient = new ApiClient({ config: this.reportConfig, auth: this.authClient })
     return Observable.create(async (observer: Observer<any>) => {
       if (params.type === 'field') {
         if (params.field) {
@@ -138,7 +138,7 @@ export class ReportResource extends BaseResource {
       value: string
     }
   }): Observable<Report|ReportField|ReportTemplate|ReportFieldValue> {
-    const apiClient = new ApiClient({ config: this.reportConfig })
+    const apiClient = new ApiClient({ config: this.reportConfig, auth: this.authClient })
     return Observable.create(async (observer: Observer<any>) => {
       if (params.type === 'field') {
         if (params.field) {
@@ -212,7 +212,7 @@ export class ReportResource extends BaseResource {
     id: string
   } 
   }): Observable<StatusMessage> {
-    const apiClient = new ApiClient({ config: this.reportConfig })
+    const apiClient = new ApiClient({ config: this.reportConfig, auth: this.authClient })
     return Observable.create(async (observer: Observer<any>) => {
       if (params.type === 'field') {
         if (params.field) {

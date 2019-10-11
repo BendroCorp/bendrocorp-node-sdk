@@ -1,6 +1,6 @@
 {
   "name": "@bendrocorp/bendrocorp-node-sdk",
-  "version": "0.2.12",
+  "version": "0.2.13",
   "description": "",
   "main": "bendrocorp-node-sdk.js",
   "types": "bendrocorp-node-sdk.d.ts",

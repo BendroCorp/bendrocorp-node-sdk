@@ -9,17 +9,17 @@ import { StatusMessage } from "./models/misc.model";
 
 export class user extends BaseResource
 {
-  reportConfig: any;
+  userConfig: BendroConfiguration;
 
   constructor(public params: { auth: AuthClient, useProduction?: boolean })
   {
     super(params);
 
-    this.reportConfig = (this.useProduction) ? new BendroConfiguration({ service: 'main' }) : new BendroConfiguration({ service: 'local' })
+    this.userConfig = (this.useProduction) ? new BendroConfiguration({ service: 'main' }) : new BendroConfiguration({ service: 'local' })
   }
 
   discord_identity(params: { code?: string, discord_identity_id?: string, type: 'join'|'complete' }): Observable<DiscordIdentity|StatusMessage> {
-    const apiClient = new ApiClient({ config: this.reportConfig })
+    const apiClient = new ApiClient({ config: this.userConfig })
     
     if (params.type === 'join') {
       if (params.code) {
@@ -36,11 +36,11 @@ export class user extends BaseResource
       } else {
         throw 'To use type \'join\' on discord_identity you must provide a code!'
       }
-    } else {
+    } else if (params.type === 'complete') {
       if (params.discord_identity_id) {
         return Observable.create(async (observer: Observer<any>) => {
           try {
-            const results = await apiClient.post<StatusMessage>(`/fields`, { }) as StatusMessage;
+            const results = await apiClient.post<StatusMessage>(`/user/`, { }) as StatusMessage;
             observer.next(results);
             observer.complete();
           } catch (error) {

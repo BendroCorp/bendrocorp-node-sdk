@@ -9,6 +9,9 @@
   "directories": {
     "lib": "lib"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "copy": "node tools/copy-package.js && node tools/copy-readme.js",
     "bundle": "rollup -c rollup.config.umd.js && rollup -c rollup.config.esm.js && tsc",

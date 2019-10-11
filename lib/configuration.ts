@@ -43,6 +43,7 @@ export class BendroConfiguration {
           } else if (params.service === 'tasks') {
             this.serviceUri = this.apiTasksUri;
           } else if (params.service === 'local') {
+            console.warn('Local service URI selected! (ie. localhost)')
             this.serviceUri = this.localUri;
           }
   

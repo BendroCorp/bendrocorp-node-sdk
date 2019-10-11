@@ -8,10 +8,10 @@ export class BaseResource {
   constructor(public params: { auth?: AuthClient, useProduction?: boolean }) {
     this.authClient = params.auth;
     // this.useProduction = (this.useProduction) ? true : false;
-    if (this.useProduction == null || this.useProduction == true) {
+    if (this.useProduction == null) {
       this.useProduction = true;
     } else {
-      this.useProduction = false;
+      this.useProduction = params.useProduction;
     }
   }
 }

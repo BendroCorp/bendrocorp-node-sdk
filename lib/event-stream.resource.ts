@@ -12,7 +12,7 @@ export class StreamResource extends BaseResource {
   private streamConfig: BendroConfiguration;
   channel: Channel;
 
-  constructor(public params: { auth: AuthClient, useProduction?: boolean }, private cableService: ActionCableService)
+  constructor(public params: { auth: AuthClient, useProduction?: boolean })
   {
     super(params);
 
@@ -26,7 +26,7 @@ export class StreamResource extends BaseResource {
     const fullCableUri = `${this.streamConfig.serviceUri}?token=${this.authClient.getCredentials().access_token}`;
     console.log(`Cable service URI: ${fullCableUri}`);
     
-    this.channel = this.cableService
+    this.channel = new ActionCableService()
           .cable(fullCableUri)
           .channel('EventChannel');
     return this.channel.received();

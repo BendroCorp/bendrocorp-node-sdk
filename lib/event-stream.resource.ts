@@ -5,7 +5,7 @@ import { BaseResource } from './base.resource';
 import { AuthClient } from './auth-client';
 import { BendroConfiguration } from './configuration';
 
-export class event_stream extends BaseResource {
+export class streamResource extends BaseResource {
   private streamConfig: BendroConfiguration;
   channel: Channel;
 

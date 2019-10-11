@@ -1,6 +1,6 @@
 {
-  "name": "bendrocorp-node-sdk",
-  "version": "0.1.0",
+  "name": "@bendrocorp/bendrocorp-node-sdk",
+  "version": "0.2.0",
   "description": "",
   "main": "bendrocorp-node-sdk.umd.js",
   "jsnext:main": "bendrocorp-node-sdk.esm.js",
@@ -8,6 +8,9 @@
   "types": "bendrocorp-node-sdk.d.ts",
   "directories": {
     "lib": "lib"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "scripts": {
     "copy": "node tools/copy-package.js && node tools/copy-readme.js",
@@ -54,6 +57,7 @@
   },
   "dependencies": {
     "@types/jsonwebtoken": "^8.3.4",
+    "angular2-actioncable": "^6.0.2",
     "axios": "^0.19.0",
     "jsonwebtoken": "^8.5.1",
     "moment": "^2.24.0",

@@ -58,6 +58,8 @@ export class AuthClient {
 
       if (!(result instanceof HttpClientError) && result instanceof IdTokenResponse) {
         this.setCredentials({ access_token: result.access_token, refresh_token: result.refresh_token, id_token: result.id_token })
+      } else {
+        throw 'Error Occured: Credentials could not be refreshed!'
       }
     } else {
       console.warn('Could not auto refresh.')

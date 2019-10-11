@@ -1,0 +1,16 @@
+{
+    "compilerOptions": {
+       "target": "es2015",
+       "module": "commonjs",
+       "sourceMap": true,
+       "moduleResolution": "node",
+       "experimentalDecorators": true,
+       "declaration": true,
+       "declarationDir": "./dist",
+       "outDir": "./dist",
+       "lib": [ "dom", "es6", "es5" ],
+       "types": [] // https://stackoverflow.com/questions/51634361/how-to-force-tsc-to-ignore-node-modules-folder
+    },
+    "include": ["lib"],
+   "exclude": ["node_modules"]
+ }

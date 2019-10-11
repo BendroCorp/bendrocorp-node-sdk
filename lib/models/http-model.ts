@@ -3,4 +3,5 @@ export class HttpClientError {
   message?: string;
   data?: any;
   headers: any;
+  fullError: any;
 }

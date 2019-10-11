@@ -45,7 +45,7 @@ export class ApiClient {
             console.log(error.response.status);
             console.log(error.response.headers);
   
-            reject({ status: error.response.status, data: error.response.data, headers: error.response.headers } as HttpClientError);
+            reject({ status: error.response.status, data: error.response.data, headers: error.response.headers, fullError: error } as HttpClientError);
           } else {
             // Something happened in setting up the request that triggered an Error
             reject(error);
@@ -88,7 +88,7 @@ export class ApiClient {
           console.log(error.response.status);
           console.log(error.response.headers);
   
-          reject({ status: error.response.status, data: error.response.data, headers: error.response.headers } as HttpClientError);
+          reject({ status: error.response.status, data: error.response.data, headers: error.response.headers, fullError: error } as HttpClientError);
         } else {
           // Something happened in setting up the request that triggered an Error
           reject(error);
@@ -131,7 +131,7 @@ export class ApiClient {
           console.log(error.response.status);
           console.log(error.response.headers);
   
-          reject({ status: error.response.status, data: error.response.data, headers: error.response.headers } as HttpClientError);
+          reject({ status: error.response.status, data: error.response.data, headers: error.response.headers, fullError: error } as HttpClientError);
         } else {
           // Something happened in setting up the request that triggered an Error
           reject(error);
@@ -173,7 +173,7 @@ export class ApiClient {
           console.log(error.response.status);
           console.log(error.response.headers);
   
-          reject({ status: error.response.status, data: error.response.data, headers: error.response.headers } as HttpClientError);
+          reject({ status: error.response.status, data: error.response.data, headers: error.response.headers, fullError: error } as HttpClientError);
         } else {
           // Something happened in setting up the request that triggered an Error
           reject(error)

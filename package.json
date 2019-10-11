@@ -1,6 +1,6 @@
 {
   "name": "@bendrocorp/bendrocorp-node-sdk",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "",
   "main": "bendrocorp-node-sdk.umd.js",
   "jsnext:main": "bendrocorp-node-sdk.esm.js",

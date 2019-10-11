@@ -3,6 +3,9 @@ import { AuthClient } from './auth-client'
 import axios from 'axios';
 import { HttpClientError } from "./models/http-model";
 
+/**
+ * Internal API client. DO NOT INSTANTIATE DIRECTLY.
+ */
 export class ApiClient {
   constructor(public params: { config: BendroConfiguration, auth?: AuthClient }) {
     //

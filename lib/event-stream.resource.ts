@@ -1,5 +1,5 @@
 // import { Channel, ActionCableService } from 'angular2-actioncable';
-import * as actioncable from 'actioncable'
+import { ActionCable } from 'actioncable-nodejs';
 import { Observable, Observer } from 'rxjs';
 import { StreamEvent } from './models/stream-event.model';
 import { BaseResource } from './base.resource';
@@ -28,25 +28,28 @@ export class StreamResource extends BaseResource {
     const fullCableUri = `${this.streamConfig.serviceUri}?token=${this.authClient.getCredentials().access_token}`;
     console.log(`Cable service URI: ${fullCableUri}`);
 
-    let cable = actioncable.createConsumer(fullCableUri);
-    cable.connect();
-
     return Observable.create(async (observer: Observer<any>) => {
+      
       try {
-        cable.subscriptions.create({ channel: 'EventChannel' }, { 
-          received: function(data) {
-            observer.next(data as StreamEvent);
-            observer.complete();
-          },
-          connected: function() {
-            //
+        let cable = new ActionCable(fullCableUri);
+         
+        let subscription = cable.subscribe('RouterTestAgentChannel', {
+          connected() {
             console.log(`Connected to: ${fullCableUri}`);
           },
-          disconnected: () => {
-            //
+         
+          disconnected() {
             console.log(`Disconnected from: ${fullCableUri}`);
           },
-        })
+         
+          rejected() {
+            console.error(`${fullCableUri} rejected out connection!`);
+          },
+         
+          received(data) {
+            observer.next(data as StreamEvent);
+          }
+        });
         
       } catch (error) {
         observer.error(error as HttpClientError);

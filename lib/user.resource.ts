@@ -15,6 +15,11 @@ export class UserResource extends BaseResource
   {
     super(params);
 
+    const credCheck = params.auth.getCredentials();
+    if (credCheck.access_token == null && credCheck.refresh_token == null) {
+      throw 'Both passed tokens cannot be null!'
+    }
+
     this.userConfig = (this.useProduction) ? new BendroConfiguration({ service: 'main' }) : new BendroConfiguration({ service: 'local' })
   }
 
@@ -40,7 +45,8 @@ export class UserResource extends BaseResource
       if (params.discord_identity_id) {
         return Observable.create(async (observer: Observer<any>) => {
           try {
-            const results = await apiClient.post<StatusMessage>(`/user/`, { }) as StatusMessage;
+            const discord_identity_id = params.discord_identity_id;
+            const results = await apiClient.post<StatusMessage>(`/user/`, { discord_identity_id }) as StatusMessage;
             observer.next(results);
             observer.complete();
           } catch (error) {

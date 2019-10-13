@@ -79,10 +79,13 @@ export class ApiClient {
           const authHeader = await this.params.auth.getAuthHeader()
           if (authHeader) {
             reqHeaders['Authorization'] = authHeader;
+            console.log(`Auth header set: ${authHeader}`);
+          } else {
+            console.warn('No auth header found!')
           }
         }
   
-        const results = await axios.post(this.params.config.serviceUri + uri, { headers: reqHeaders });
+        const results = await axios.post(this.params.config.serviceUri + uri, data, { headers: reqHeaders });
         const resultData = results.data as T;
         resolve(resultData);
       } catch (error) {
@@ -122,10 +125,13 @@ export class ApiClient {
           const authHeader = await this.params.auth.getAuthHeader()
           if (authHeader) {
             reqHeaders['Authorization'] = authHeader;
+            console.log(`Auth header set: ${authHeader}`);
+          } else {
+            console.warn('No auth header found!')
           }
         }
   
-        const results = await axios.put(this.params.config.serviceUri + uri, { headers: reqHeaders });
+        const results = await axios.put(this.params.config.serviceUri + uri, data, { headers: reqHeaders });
         const resultData = results.data as T;
         resolve(resultData);
       } catch (error) {
@@ -164,6 +170,9 @@ export class ApiClient {
           const authHeader = await this.params.auth.getAuthHeader()
           if (authHeader) {
             reqHeaders['Authorization'] = authHeader;
+            console.log(`Auth header set: ${authHeader}`);
+          } else {
+            console.warn('No auth header found!')
           }
         }
   

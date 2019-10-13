@@ -46,7 +46,7 @@ export class UserResource extends BaseResource
         return Observable.create(async (observer: Observer<any>) => {
           try {
             const discord_identity_id = params.discord_identity_id;
-            const results = await apiClient.post<StatusMessage>(`/user/`, { discord_identity_id }) as StatusMessage;
+            const results = await apiClient.put<StatusMessage>(`/user/discord-identity/${params.discord_identity_id}`, { }) as StatusMessage;
             observer.next(results);
             observer.complete();
           } catch (error) {

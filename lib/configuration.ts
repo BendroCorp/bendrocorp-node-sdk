@@ -29,7 +29,11 @@ export class BendroConfiguration {
           } else if (params.service === 'tasks') {
             this.serviceUri = this.apiTasksUri;
           } else if (params.service === 'local') {
-            this.serviceUri = this.localUri;
+            this.serviceUri = `ws://${this.localUri}`;
+          }
+
+          if (params.service !== 'local') {
+            this.serviceUri = `wss://${this.serviceUri}`
           }
           
           // always append cable
@@ -44,7 +48,11 @@ export class BendroConfiguration {
             this.serviceUri = this.apiTasksUri;
           } else if (params.service === 'local') {
             console.warn('Local service URI selected! (ie. localhost)')
-            this.serviceUri = this.localUri;
+            this.serviceUri = `http://${this.localUri}`;
+          }
+
+          if (params.service !== 'local') {
+            this.serviceUri = `https://${this.serviceUri}`
           }
   
           if (!params.skipAppendApi) {
@@ -60,8 +68,8 @@ export class BendroConfiguration {
   }
 
   public readonly serviceUri: string;
-  private readonly apiMainUri: string = "https://api.bendrocorp.com";
-  private readonly apiReportsUri: string = "https://api.reports.bendrocorp.com";
-  private readonly apiTasksUri: string = "https://api.tasks.bendrocorp.com";
-  private readonly localUri: string = 'http://localhost:3000';
+  private readonly apiMainUri: string = "api.bendrocorp.com";
+  private readonly apiReportsUri: string = "api.reports.bendrocorp.com";
+  private readonly apiTasksUri: string = "api.tasks.bendrocorp.com";
+  private readonly localUri: string = 'localhost:3000';
 }

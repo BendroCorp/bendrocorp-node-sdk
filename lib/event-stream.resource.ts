@@ -1,11 +1,11 @@
 // import { Channel, ActionCableService } from 'angular2-actioncable';
-import { ActionCable } from 'actioncable-nodejs';
 import { Observable, Observer } from 'rxjs';
 import { StreamEvent } from './models/stream-event.model';
 import { BaseResource } from './base.resource';
 import { AuthClient } from './auth-client';
 import { BendroConfiguration } from './configuration';
 import { HttpClientError } from './models/http-model';
+import * as ActionCable from 'actioncable'
 
 /**
  * Gives you access to the BendroCorp event stream. Please note this is *not* intended to by users. It is intended to be consumed by client applications.
@@ -25,36 +25,43 @@ export class StreamResource extends BaseResource {
    * Get the event stream
    */
   get(): Observable<StreamEvent> {
-    const fullCableUri = `${this.streamConfig.serviceUri}?token=${this.authClient.getCredentials().access_token}`;
-    console.log(`Cable service URI: ${fullCableUri}`);
+    throw 'Not currently in use!'
+    // const fullCableUri = `${this.streamConfig.serviceUri}?token=${this.authClient.getCredentials().access_token}`;
+    // console.log(`Cable service URI: ${fullCableUri}`);
 
-    return Observable.create(async (observer: Observer<any>) => {
+    // return Observable.create(async (observer: Observer<any>) => {
       
-      try {
-        let cable = new ActionCable(fullCableUri);
+    //   try {
+
+        // let App: any;
+
+        // let cable = ActionCable.createConsumer(fullCableUri);
+        // cable.subscriptions.create()
+
+        // let cable = new ActionCable(fullCableUri);
          
-        let subscription = cable.subscribe('RouterTestAgentChannel', {
-          connected() {
-            console.log(`Connected to: ${fullCableUri}`);
-          },
+        // let subscription = cable.subscribe('RouterTestAgentChannel', {
+        //   connected() {
+        //     console.log(`Connected to: ${fullCableUri}`);
+        //   },
          
-          disconnected() {
-            console.log(`Disconnected from: ${fullCableUri}`);
-          },
+        //   disconnected() {
+        //     console.log(`Disconnected from: ${fullCableUri}`);
+        //   },
          
-          rejected() {
-            console.error(`${fullCableUri} rejected out connection!`);
-          },
+        //   rejected() {
+        //     console.error(`${fullCableUri} rejected out connection!`);
+        //   },
          
-          received(data) {
-            observer.next(data as StreamEvent);
-          }
-        });
+        //   received(data) {
+        //     observer.next(data as StreamEvent);
+        //   }
+        // });
         
-      } catch (error) {
-        observer.error(error as HttpClientError);
-      }
-    });
+      // } catch (error) {
+      //   observer.error(error as HttpClientError);
+      // }
+    // });
 
     
     

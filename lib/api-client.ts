@@ -31,6 +31,7 @@ export class ApiClient {
           const authHeader = await this.params.auth.getAuthHeader()
           if (authHeader) {
             reqHeaders['Authorization'] = authHeader;
+            console.log(`Auth header set: ${authHeader}`);
           }
         }
 

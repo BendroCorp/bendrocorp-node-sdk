@@ -82,7 +82,7 @@ export class EventResource extends BaseResource {
       if (params.discord_user_ids) {
         return Observable.create(async (observer: Observer<any>) => {
           try {
-            const results = await apiClient.post<EventAttendence>(`/events/attend`, { event_id: params.event_id, attendence_type_id: params.attendence_type_id }) as EventAttendence;
+            const results = await apiClient.post<EventAttendence>(`/events/attend/auto`, { event_id: params.event_id, attendence_type_id: params.attendence_type_id }) as EventAttendence;
             observer.next(results);
             observer.complete();
           } catch (error) {

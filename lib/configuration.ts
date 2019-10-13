@@ -65,6 +65,8 @@ export class BendroConfiguration {
     } else {
       this.serviceUri = this.apiMainUri;
     }
+
+    console.log(`Service URI: ${this.serviceUri}`);
   }
 
   public readonly serviceUri: string;

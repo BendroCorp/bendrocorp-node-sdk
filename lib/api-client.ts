@@ -32,6 +32,8 @@ export class ApiClient {
           if (authHeader) {
             reqHeaders['Authorization'] = authHeader;
             console.log(`Auth header set: ${authHeader}`);
+          } else {
+            console.warn('No auth header found!')
           }
         }
 

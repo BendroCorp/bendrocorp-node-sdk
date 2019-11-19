@@ -1,6 +1,6 @@
 {
   "name": "@bendrocorp/bendrocorp-node-sdk",
-  "version": "0.2.35",
+  "version": "0.2.36",
   "description": "An SDK for developing against the BendroCorp application suite.",
   "main": "bendrocorp-node-sdk.js",
   "types": "bendrocorp-node-sdk.d.ts",

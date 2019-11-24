@@ -5,17 +5,19 @@ export class Report {
   report_for_id?: string;
   draft?: boolean;
   approved?: boolean;
-  fields?: ReportField[]
+  fields?: ReportField[];
 }
 
 export class ReportTemplate {
   id?: string;
   name?: string;
+  fields?: ReportField[];
 }
 
 export class ReportField {
   id?: string;
   template_id?: string;
+  report_id?: string;
   name?: string;
   validator?: string;
   field_presentation_type_id?: number;

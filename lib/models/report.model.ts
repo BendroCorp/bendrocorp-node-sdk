@@ -11,6 +11,7 @@ export class Report {
 export class ReportTemplate {
   id?: string;
   name?: string;
+  draft?: boolean;
   fields?: ReportField[];
 }
 

@@ -1,5 +1,5 @@
 export class Report {
-  id?: number;
+  id?: string;
   template_id?: string;
   created_by_id?: string;
   report_for_id?: string;

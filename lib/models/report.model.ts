@@ -15,6 +15,19 @@ export class ReportTemplate {
   fields?: ReportField[];
 }
 
+export class ReportHandler {
+  id?: string;
+  name?: string;
+  variables: ReportHandlerVariable[];
+}
+
+export class ReportHandlerVariable {
+  id?: string;
+  handler_id?: string;
+  name?: string;
+  object_name?: string;
+}
+
 export class ReportField {
   id?: string;
   template_id?: string;
@@ -24,7 +37,6 @@ export class ReportField {
   field_presentation_type_id?: number;
   required?: boolean;
   ordinal?: number;
-
   field_value?: ReportFieldValue;
 }
 

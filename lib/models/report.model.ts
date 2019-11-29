@@ -1,6 +1,8 @@
 export class Report {
   id?: string;
   template_id?: string;
+  template_name?: string;
+  template_description?: string;
   created_by_id?: string;
   report_for_id?: string;
   draft?: boolean;
@@ -13,6 +15,7 @@ export class Report {
 export class ReportTemplate {
   id?: string;
   name?: string;
+  description?: string;
   draft?: boolean;
   fields?: ReportField[];
   handler_id?: string;
@@ -37,6 +40,7 @@ export class ReportField {
   template_id?: string;
   report_id?: string;
   name?: string;
+  description?: string;
   validator?: string;
   field_presentation_type_id?: number;
   required?: boolean;

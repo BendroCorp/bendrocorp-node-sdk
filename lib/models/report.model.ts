@@ -6,6 +6,8 @@ export class Report {
   draft?: boolean;
   approved?: boolean;
   fields?: ReportField[];
+  handler_id?: string;
+  handler: ReportHandler;
 }
 
 export class ReportTemplate {
@@ -13,12 +15,14 @@ export class ReportTemplate {
   name?: string;
   draft?: boolean;
   fields?: ReportField[];
+  handler_id?: string;
+  handler: ReportHandler;
 }
 
 export class ReportHandler {
   id?: string;
   name?: string;
-  variables: ReportHandlerVariable[];
+  variables?: ReportHandlerVariable[];
 }
 
 export class ReportHandlerVariable {

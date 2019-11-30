@@ -1,3 +1,5 @@
+import { Field } from "./field.model";
+
 export class Report {
   id?: string;
   template_id?: string;
@@ -39,6 +41,8 @@ export class ReportField {
   id?: string;
   template_id?: string;
   report_id?: string;
+  field_id?: string;
+  field?: Field;
   name?: string;
   description?: string;
   validator?: string;

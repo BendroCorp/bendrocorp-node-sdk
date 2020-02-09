@@ -4,6 +4,12 @@
 
 #### Pre-Release - should not be used for anything anyone actually cares about :smile:
 
+#### Builds
+`npm run build`
+
+#### Publish to NPM
+`cd ./dist && npm publish`
+
 #### AuthClient
 Used to fetch and manage a token. Currently this only supports password authentication and refresh authentication.
 ```

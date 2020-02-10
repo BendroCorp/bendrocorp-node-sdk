@@ -1,4 +1,5 @@
 import { Field } from "./field.model";
+import { Role } from "./user.model";
 
 export class Report {
   id?: string;
@@ -22,6 +23,8 @@ export class ReportTemplate {
   fields?: ReportField[];
   handler_id?: string;
   handler: ReportHandler;
+  role_id: number;
+  role: Role;
 }
 
 export class ReportHandler {

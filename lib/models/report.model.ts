@@ -8,6 +8,7 @@ export class Report {
   template_description?: string;
   created_by_id?: string;
   report_for_id?: string;
+  report_for: ReportRoute;
   draft?: boolean;
   approved?: boolean;
   fields?: ReportField[];
@@ -25,6 +26,8 @@ export class ReportTemplate {
   handler: ReportHandler;
   role_id: number;
   role: Role;
+  report_for_id?: string;
+  report_for: ReportRoute;
 }
 
 export class ReportHandler {

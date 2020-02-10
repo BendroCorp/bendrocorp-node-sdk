@@ -1,5 +1,5 @@
 import { Field } from "./field.model";
-import { Role } from "./user.model";
+import { Role, User } from "./user.model";
 
 export class Report {
   id?: string;
@@ -60,4 +60,13 @@ export class ReportFieldValue {
   field_id?: string;
   report_id?: string;
   value?: string;
+}
+
+export class ReportRoute {
+  id?: string;
+  title?: string;
+  for_role_id?: number;
+  for_role?: Role;  
+  for_user_id?: number;
+  for_user?: User;
 }

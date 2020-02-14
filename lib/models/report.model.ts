@@ -33,6 +33,8 @@ export class ReportTemplate {
 export class ReportHandler {
   id?: string;
   name?: string;
+  for_class?: string;
+  approval_kind_id?: number;
   variables?: ReportHandlerVariable[];
 }
 

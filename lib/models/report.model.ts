@@ -58,6 +58,8 @@ export class ReportField {
   required?: boolean;
   ordinal?: number;
   field_value?: ReportFieldValue;
+  report_handler_variable_id?: string;
+  report_handler_variable?: ReportHandlerVariable;
 }
 
 export class ReportFieldValue {

@@ -1,3 +1,5 @@
+import { from } from 'rxjs';
+
 // resources
 export { BaseResource } from './base.resource'
 export { BendroConfiguration } from './configuration'
@@ -9,3 +11,5 @@ export { ReportResource } from './report.resource';
 
 // models
 export { Event, EventAttendence, EventBriefing, EventDebriefing, EventType } from './models/event.model'
+
+export { } from './models/page.model'

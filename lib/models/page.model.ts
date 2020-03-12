@@ -12,7 +12,9 @@ export class Page {
   page_category?: PageCategory;
 }
 
-export class PageCategory extends IdTitle {
+export class PageCategory {
+  id?: string;
+  title?: string;
 }
 
 export class PageEdit {

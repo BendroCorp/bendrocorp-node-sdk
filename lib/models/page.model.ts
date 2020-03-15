@@ -9,7 +9,7 @@ export class Page {
   tags?: string;
   read_only?: boolean;
   published_when?: Date;
-  page_category?: PageCategory;
+  categories?: PageCategory[];
 }
 
 export class PageCategory {

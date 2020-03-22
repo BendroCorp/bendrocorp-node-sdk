@@ -10,6 +10,7 @@ export class Page {
   read_only?: boolean;
   published_when?: Date;
   categories?: PageCategory[];
+  creator?: User;
 }
 
 export class PageCategory {

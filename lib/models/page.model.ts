@@ -10,7 +10,14 @@ export class Page {
   read_only?: boolean;
   published_when?: Date;
   categories?: PageCategory[];
+  /**
+   * Used with the API for adding categories.
+   */
   new_categories?: PageCategory[];
+  /**
+   * Used with the API for removing categories.
+   */
+  remove_categories?: PageCategory[];
   creator?: User;
 }
 

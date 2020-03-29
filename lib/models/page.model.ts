@@ -8,6 +8,7 @@ export class Page {
   content?: string;
   tags?: string;
   read_only?: boolean;
+  published?: boolean;
   published_when?: Date;
   categories?: PageCategory[];
   /**

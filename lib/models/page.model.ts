@@ -1,5 +1,6 @@
 import { IdTitleDesc, IdTitle } from "./misc.model";
 import { User, Role } from "./user.model";
+import { FieldDescriptor } from "./field.model";
 
 export class Page {
   id?: string;
@@ -10,22 +11,23 @@ export class Page {
   read_only?: boolean;
   published?: boolean;
   published_when?: Date;
-  categories?: PageCategory[];
+  categories?: FieldDescriptor[];
   /**
    * Used with the API for adding categories.
    */
-  new_categories?: PageCategory[];
+  new_categories?: FieldDescriptor[];
   /**
    * Used with the API for removing categories.
    */
-  remove_categories?: PageCategory[];
+  remove_categories?: FieldDescriptor[];
   creator?: User;
 }
 
-export class PageCategory {
-  id?: string;
-  title?: string;
-}
+// DEPRECATED
+// export class PageCategory {
+//   id?: string;
+//   title?: string;
+// }
 
 export class PageEdit {
   id?: string;

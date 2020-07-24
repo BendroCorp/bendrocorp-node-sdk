@@ -21,6 +21,7 @@ export class Page {
    */
   remove_categories?: FieldDescriptor[];
   creator?: User;
+  archived?: boolean;
 }
 
 // DEPRECATED

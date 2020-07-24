@@ -25,10 +25,10 @@ export class Page {
 }
 
 // DEPRECATED
-// export class PageCategory {
-//   id?: string;
-//   title?: string;
-// }
+export class PageCategory {
+  id?: string;
+  title?: string;
+}
 
 export class PageEdit {
   id?: string;

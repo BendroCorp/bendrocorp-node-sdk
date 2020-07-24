@@ -12,4 +12,4 @@ export { ReportResource } from './report.resource';
 // models
 export { Event, EventAttendence, EventBriefing, EventDebriefing, EventType } from './models/event.model'
 
-export { Page, PageEdit, PageRole } from './models/page.model'
+export { Page, PageCategory, PageEdit, PageRole } from './models/page.model'
